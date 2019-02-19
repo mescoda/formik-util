@@ -1,6 +1,6 @@
 {
   "name": "formik-util",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Utilities for formik ",
   "main": "dist/cjs/formik-util.js",
   "module": "dist/esm/formik-util.js",
@@ -8,6 +8,7 @@
     "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": "github:mescoda/formik-util",
   "keywords": [
     "react",
     "formik"

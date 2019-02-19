@@ -1,4 +1,14 @@
-/dist
+/src
+rollup.config.js
+
+package-lock.json
+yarn.lock
+
+.editorconfig
+.eslintignore
+.eslintrc
+.babelrc
+.gitignore
 
 /node_modules
 

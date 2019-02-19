@@ -1,3 +1,6 @@
+/**
+ * Add `error` `value` `touch` `onChange` `onBlur` props depend on `name` prop setted on `Formik.Field` to simplify `Formik.Field` declaration.
+ */
 
 import React from 'react';
 
@@ -6,7 +9,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics';
 import getDisplayName from './getDisplayName';
 
 /**
- * add `error` `value` `onChange` props depend on `name` prop setted on `Formik.Field`
+ * Add `error` `value` `touch` `onChange` `onBlur` props depend on `name` prop setted on `Formik.Field`
  *
  * @param {React.Component} Component wrappedComponent
  * @return {React.Component} result component

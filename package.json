@@ -1,0 +1,32 @@
+{
+  "name": "formik-util",
+  "version": "0.0.1",
+  "description": "Utilities for formik ",
+  "main": "dist/cjs/formik-util.js",
+  "module": "dist/esm/formik-util.js",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "formik"
+  ],
+  "author": "mescoda",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=15",
+    "formik": ">=1.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "rollup": "^1.2.2",
+    "rollup-plugin-babel": "^4.3.2"
+  },
+  "dependencies": {
+    "hoist-non-react-statics": "^3.3.0"
+  }
+}

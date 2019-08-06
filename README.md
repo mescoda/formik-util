@@ -86,7 +86,8 @@ Add `error` `value` `touch` `onChange` `onBlur` props depend on `name` prop sett
 import React from 'react';
 
 import {
-    Field
+    Field,
+    withFormik
 } from 'formik';
 
 import {
@@ -134,19 +135,23 @@ const SelectItem = props => {
 
 const SelectFormikItem = withFormikItem(SelectItem);
 
-const Field = props => {
+const UI = props => {
     return (
-        <Field
-            {...{
-                component: SelectFormikItem,
-                dataSource: userIDDataSource,
-                name: 'userID',
-                validate: value => {
-                    return value === '' ? 'Required' : '';
-                }
-            }}
-        />
+        <div>
+            <Field
+                {...{
+                    component: SelectFormikItem,
+                    dataSource: userIDDataSource,
+                    name: 'userID',
+                    validate: value => {
+                        return value === '' ? 'Required' : '';
+                    }
+                }}
+            />
+        </div>
     );
-}
+};
+
+withFormik({})(UI);
 
 ```

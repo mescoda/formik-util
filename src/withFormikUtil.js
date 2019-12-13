@@ -73,12 +73,16 @@ const handlers = {
 
 export default Component => {
 
-    const WithFormikUtilComponent = props => {
+    function WithFormikUtilComponent({
+        forwardedRef,
+        ...restProps
+    }) {
         return (
             <Component
                 {...{
+                    ref: forwardedRef,
                     ...handlers,
-                    ...props
+                    ...restProps
                 }}
             />
         );
@@ -87,5 +91,21 @@ export default Component => {
     WithFormikUtilComponent.displayName = `WithFormikUtil(${getDisplayName(Component)})`;
     WithFormikUtilComponent.WrappedComponent = Component;
 
-    return hoistNonReactStatics(WithFormikUtilComponent, Component);
+    function forwardRef(props, ref) {
+        return (
+            <WithFormikUtilComponent
+                {...{
+                    ...props,
+                    forwardedRef: ref
+                }}
+            />
+        );
+    }
+
+    forwardRef.displayName = `WithForwardRef(${getDisplayName(WithFormikUtilComponent)})`;
+    forwardRef.WrappedComponent = WithFormikUtilComponent;
+
+    hoistNonReactStatics(forwardRef, WithFormikUtilComponent);
+
+    return React.forwardRef(forwardRef);
 };

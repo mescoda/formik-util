@@ -22,7 +22,8 @@ With the help of `withFormikUtil`, you can use the injected `validateFormAndTouc
 import React from 'react';
 
 import {
-    withFormik
+    withFormik,
+    Field
 } from 'formik';
 
 import {
@@ -46,6 +47,11 @@ const UI = class extends React.PureComponent {
     render() {
         return (
             <form>
+                <Field
+                    {...{
+                        // ...
+                    }}
+                />
                 <button
                     onClick={this.onClickSubmit}
                 >
@@ -75,6 +81,7 @@ Full injected method list:
 - setAllTouched
 - triggerValidateForm
 - validateFormAndTouchAll
+- validateFieldAndTouch
 
 
 ### `withFormikItem`

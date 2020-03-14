@@ -1,6 +1,7 @@
 /**
  * inject utility method to Formik component
  * - validateFormAndTouchAll
+ * - validateFieldAndTouch
  */
 
 import React from 'react';
@@ -67,6 +68,34 @@ const handlers = {
         const props = this;
         return props.setAllTouched().then(() => {
             return props.triggerValidateForm();
+        });
+    },
+
+    /**
+     * validate single field and set it as touched
+     *
+     * @param {string} fieldName field name
+     * @return {Promise} validating
+     */
+    validateFieldAndTouch(fieldName) {
+        const props = this;
+        props.setTouched({
+            [fieldName]: true
+        }, false);
+        return new Promise((resolve, reject) => {
+            props.validateField(fieldName).then(
+                // handle sync validation
+                error => {
+                    if (error) {
+                        return reject(error);
+                    }
+                    resolve(props.values[fieldName]);
+                },
+                // handle async validation
+                error => {
+                    return reject(error);
+                }
+            );
         });
     }
 };

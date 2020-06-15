@@ -1,6 +1,6 @@
 {
   "name": "formik-util",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Utilities for formik ",
   "main": "dist/cjs/formik-util.js",
   "module": "dist/esm/formik-util.js",

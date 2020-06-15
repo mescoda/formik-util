@@ -17,12 +17,20 @@ import getDisplayName from './getDisplayName';
  */
 export default (Component, getPartialProps = () => {}) => {
 
-    const withFormikItemComponent = props => {
+    function WithFormikItemComponent(props) {
+
         const name = props.field.name;
+
+        const {
+            forwardedRef,
+            ...restProps
+        } = props;
+
         return (
             <Component
                 {...{
                     name,
+                    ref: forwardedRef,
                     error: props.form.errors[name],
                     value: props.form.values[name],
                     touch: props.form.touched[name],
@@ -33,15 +41,31 @@ export default (Component, getPartialProps = () => {}) => {
                     onBlur: () => {
                         props.form.setFieldTouched(name);
                     },
-                    ...getPartialProps(props, name),
-                    ...props
+                    ...restProps,
+                    ...getPartialProps(props, name)
                 }}
             />
         );
     };
 
-    withFormikItemComponent.displayName = `WithFormikItem(${getDisplayName(Component)})`;
-    withFormikItemComponent.WrappedComponent = Component;
+    WithFormikItemComponent.displayName = `WithFormikItem(${getDisplayName(Component)})`;
+    WithFormikItemComponent.WrappedComponent = Component;
 
-    return hoistNonReactStatics(withFormikItemComponent, Component);
+    function forwardRef(props, ref) {
+        return (
+            <WithFormikItemComponent
+                {...{
+                    ...props,
+                    forwardedRef: ref
+                }}
+            />
+        );
+    }
+
+    forwardRef.displayName = `WithForwardRef(${getDisplayName(WithFormikItemComponent)})`;
+    forwardRef.WrappedComponent = WithFormikItemComponent;
+
+    hoistNonReactStatics(forwardRef, WithFormikItemComponent);
+
+    return React.forwardRef(forwardRef);
 };

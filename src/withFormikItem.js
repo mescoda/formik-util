@@ -51,7 +51,8 @@ export default (Component, getPartialProps = () => {}) => {
     WithFormikItemComponent.displayName = `WithFormikItem(${getDisplayName(Component)})`;
     WithFormikItemComponent.WrappedComponent = Component;
 
-    function forwardRef(props, ref) {
+
+    const forwarded = React.forwardRef(function (props, ref) {
         return (
             <WithFormikItemComponent
                 {...{
@@ -60,12 +61,10 @@ export default (Component, getPartialProps = () => {}) => {
                 }}
             />
         );
-    }
+    });
 
-    forwardRef.displayName = `WithForwardRef(${getDisplayName(WithFormikItemComponent)})`;
-    forwardRef.WrappedComponent = WithFormikItemComponent;
+    forwarded.displayName = `WithForwardRef(${getDisplayName(WithFormikItemComponent)})`;
+    forwarded.WrappedComponent = Component;
 
-    hoistNonReactStatics(forwardRef, WithFormikItemComponent);
-
-    return React.forwardRef(forwardRef);
+    return hoistNonReactStatics(forwarded, Component);
 };

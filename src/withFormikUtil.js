@@ -120,7 +120,8 @@ export default Component => {
     WithFormikUtilComponent.displayName = `WithFormikUtil(${getDisplayName(Component)})`;
     WithFormikUtilComponent.WrappedComponent = Component;
 
-    function forwardRef(props, ref) {
+
+    const forwarded = React.forwardRef(function (props, ref) {
         return (
             <WithFormikUtilComponent
                 {...{
@@ -129,12 +130,10 @@ export default Component => {
                 }}
             />
         );
-    }
+    });
 
-    forwardRef.displayName = `WithForwardRef(${getDisplayName(WithFormikUtilComponent)})`;
-    forwardRef.WrappedComponent = WithFormikUtilComponent;
+    forwarded.displayName = `WithForwardRef(${getDisplayName(WithFormikUtilComponent)})`;
+    forwarded.WrappedComponent = Component;
 
-    hoistNonReactStatics(forwardRef, WithFormikUtilComponent);
-
-    return React.forwardRef(forwardRef);
+    return hoistNonReactStatics(forwarded, Component);
 };

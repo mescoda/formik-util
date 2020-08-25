@@ -41,8 +41,8 @@ export default (Component, getPartialProps = () => {}) => {
                     onBlur: () => {
                         props.form.setFieldTouched(name);
                     },
-                    ...restProps,
-                    ...getPartialProps(props, name)
+                    ...getPartialProps(props, name),
+                    ...restProps
                 }}
             />
         );

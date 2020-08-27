@@ -1,10 +1,11 @@
 
 import pkg from './package.json';
 
-import babel from 'rollup-plugin-babel';
+import babel from '@rollup/plugin-babel';
 
 const external = (id) => {
-    return !id.startsWith('.') && !id.startsWith('/');
+    const isSrc = id.startsWith('.') || id.startsWith('/');
+    return !isSrc;
 };
 
 export default [
@@ -24,6 +25,7 @@ export default [
         plugins: [
             babel({
                 exclude: '/node_modules/',
+                babelHelpers: 'bundled',
                 presets: [
                     [
                         '@babel/preset-env',
@@ -35,7 +37,7 @@ export default [
                             // disable BrowserslistConfig
                             ignoreBrowserslistConfig: true,
 
-                            // Do not transform modules to CJS
+                            // Do not transform modules to CJS using babel
                             modules: false
                         }
                     ],

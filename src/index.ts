@@ -6,3 +6,7 @@ export {
 export {
     default as withFormikUtil
 } from './withFormikUtil';
+
+export {
+    default as useValidate
+} from './useValidate';

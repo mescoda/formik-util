@@ -2,6 +2,8 @@
 import pkg from './package.json';
 
 import babel from '@rollup/plugin-babel';
+import typescript from '@rollup/plugin-typescript';
+import dts from 'rollup-plugin-dts';
 
 const external = (id) => {
     const isSrc = id.startsWith('.') || id.startsWith('/');
@@ -10,7 +12,7 @@ const external = (id) => {
 
 export default [
     {
-        input: 'src/index.js',
+        input: 'src/index.ts',
         output: [
             {
                 file: pkg.main,
@@ -46,7 +48,19 @@ export default [
                 plugins: [
                     '@babel/plugin-proposal-object-rest-spread'
                 ]
-            })
+            }),
+            typescript()
+        ]
+    },
+    {
+        input: 'src/index.ts',
+        output: [
+            {
+                file: pkg.types
+            }
+        ],
+        plugins: [
+            dts()
         ]
     }
 ];
